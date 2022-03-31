@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Webpage Title -->
+    <title>Shopping Mall</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon2.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon2.ico') }}" type="image/x-icon">
+    <meta property="og:title" content="취향에 맞춰가는 쇼핑몰"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimg2.png') }}"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+
+    {#    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">#}
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+    <style>
+        .is-sparta {
+            color: #FFD180 !important;
+        }
+
+        body {
+            background-color: RGBA(255, 209, 128, 0.2);
+            min-height: 100vh;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            get_cur_view();
+        })
+
+        function buy() {
+            $.ajax({
+                type: "POST",
+                url: "/buy",
+                data: {
+                    item_color: '{{ detailed_item.color }}',
+                    item_kind: '{{ detailed_item.kind }}',
+                    item_price: '{{ detailed_item.price }}',
+                    item_material: '{{ detailed_item.material }}'
+                },
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.replace("/")
+                }
+            })
+        }
+
+        function get_cur_view() {
+            $("#card_box").empty()
+            $.ajax({
+                type: "POST",
+                url: `/get_cur_view`,
+                data: {
+                    item_color_give: '{{ detailed_item.color }}',
+                    item_kind_give: '{{ detailed_item.kind }}'
+                },
+                success: function (response) {
+                    let same_color_kind = JSON.parse(response["same_color_kind"])
+                    let same_color = JSON.parse(response["same_color"])
+                    let same_kind = JSON.parse(response["same_kind"])
+                    for (let i = 0; i < same_color_kind.length; i++) {
+                        let name = same_color_kind[i]['name']
+                        let color = same_color_kind[i]['color']
+                        let img = same_color_kind[i]['img']
+                        let price = same_color_kind[i]['price']
+                        let material = same_color_kind[i]['material']
+                        let kind = same_color_kind[i]['kind']
+
+                        let temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                           onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                            <div class="col">
+                                                <div class="card text-center" style="width: 340px;height: 280px;">
+                                                    <div class="card-body">
+                                                        <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                        <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                        <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                            가격: ${price}, 주요소재: ${material} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>`
+                        $('#card_box').append(temp_html)
+                    }
+                    for (let i = 0; i < same_color.length; i++) {
+                        let name = same_color[i]['name']
+                        let color = same_color[i]['color']
+                        let img = same_color[i]['img']
+                        let price = same_color[i]['price']
+                        let material = same_color[i]['material']
+                        let kind = same_color[i]['kind']
+
+                        let temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                           onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                            <div class="col">
+                                                <div class="card text-center" style="width: 340px;height: 280px;">
+                                                    <div class="card-body">
+                                                        <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                        <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                        <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                            가격: ${price}, 주요소재: ${material} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>`
+                        $('#card_box').append(temp_html)
+                    }
+                    for (let i = 0; i < same_kind.length; i++) {
+                        let name = same_kind[i]['name']
+                        let color = same_kind[i]['color']
+                        let img = same_kind[i]['img']
+                        let price = same_kind[i]['price']
+                        let material = same_kind[i]['material']
+                        let kind = same_kind[i]['kind']
+
+                        let temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                           onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                            <div class="col">
+                                                <div class="card text-center" style="width: 340px;height: 280px;">
+                                                    <div class="card-body">
+                                                        <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                        <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                        <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                            가격: ${price}, 주요소재: ${material} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>`
+                        $('#card_box').append(temp_html)
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-light\" style="background-color: #ffffff; margin-bottom: 20px;">
+    <div class="container-fluid">
+        <a class="navbar-brand is-sparta" href="/"
+           style="font-family: 'Stylish', sans-serif;font-size: xxx-large;align-items: center">
+            <img src="{{ url_for('static', filename='logo2.png') }}" width="60" height="40" style="margin-right: 10px;">
+            Shopping mall
+        </a>
+        <form class="d-flex">
+            {#            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" 검색 창 사용할 시#}
+            {#                   style="margin-right: 10px;">#}
+            {#            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px;" >Search</button>#}
+            <a class="navbar-brand is-sparta" href="/user/{{ user_info.username }}"
+               style="font-family: 'Stylish', sans-serif;font-size: xx-large;align-items: center">
+                <img class="" src="{{ url_for('static', filename=user_info.profile_pic_real) }}" alt=""
+                     width="80" height="60" style="margin-right: 10px;">{{ user_info.profile_name }}
+            </a>
+        </form>
+    </div>
+</nav>
+<div class="card mb-3" style="max-width: 680px; margin-left: 350px;">
+    <a href="{{ detailed_item.site }}" target="_blank">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ detailed_item.img }}" class="img-fluid rounded-start" style="width: 230px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title"
+                        style="font-weight: bold; font-size: x-large; margin-top: 10px; margin-bottom: 35px; color: black;">
+                        {{ detailed_item.name }}</h2>
+                    <p class="card-text"
+                       style="font-weight: bold; color: red; font-size: large; margin-bottom: 6px;">
+                        가격 : {{ detailed_item.price }}</p>
+                    <p class="card-text" style="color: black;">주요소재 : {{ detailed_item.material }}</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    <button type="button" class="btn btn-success" onclick="buy()">구매</button>
+</div>
+<h1 style="font-size: x-large; margin-left: 20px;">현재 보고 있는 상품과 비슷한 상품들</h1>
+<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;"></div>
+</body>
+</html>

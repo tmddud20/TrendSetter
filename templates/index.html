@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Webpage Title -->
+    <title>Main | Shopping Mall</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon2.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon2.ico') }}" type="image/x-icon">
+    <meta property="og:title" content="취향에 맞춰가는 쇼핑몰"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimg2.png') }}"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+
+    <style>
+        .is-sparta {
+            color: #FFD180 !important;
+        }
+
+        body {
+            background-color: RGBA(255, 209, 128, 0.2);
+            min-height: 100vh;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST",
+                url: "/get_rec",
+                data: {},
+                success: function (response) {
+                    let max_max = JSON.parse(response["max_max"])
+                    let max_sec = JSON.parse(response["max_sec"])
+                    let sec_max = JSON.parse(response["sec_max"])
+                    let sec_sec = JSON.parse(response["sec_sec"])
+
+                    let max_max3 = JSON.parse(response["max_max3"])
+
+                    for (let i = 0; i < max_max.length; i++) {
+                        let name = max_max[i]['name']
+                        let color = max_max[i]['color']
+                        let img = max_max[i]['img']
+                        let price = max_max[i]['price']
+                        let material = max_max[i]['material']
+                        let kind = max_max[i]['kind']
+
+                        let temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                           onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                            <div class="col">
+                                                <div class="card text-center" style="width: 340px;height: 280px;">
+                                                    <div class="card-body">
+                                                        <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                        <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                        <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                            가격: ${price}, 주요소재: ${material} </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>`
+                        $('#card_box').append(temp_html)
+                    }
+                    let name = max_sec[0]['name']
+                    let color = max_sec[0]['color']
+                    let img = max_sec[0]['img']
+                    let price = max_sec[0]['price']
+                    let material = max_sec[0]['material']
+                    let kind = max_sec[0]['kind']
+
+                    let temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                       onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                        <div class="col">
+                                            <div class="card text-center" style="width: 340px;height: 280px;">
+                                                <div class="card-body">
+                                                    <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                    <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                    <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                        가격: ${price}, 주요소재: ${material} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>`
+                    $('#card_box').append(temp_html)
+
+                    name = sec_max[0]['name']
+                    color = sec_max[0]['color']
+                    img = sec_max[0]['img']
+                    price = sec_max[0]['price']
+                    material = sec_max[0]['material']
+                    kind = sec_max[0]['kind']
+
+                    temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                       onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                        <div class="col">
+                                            <div class="card text-center" style="width: 340px;height: 280px;">
+                                                <div class="card-body">
+                                                    <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                    <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                    <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                        가격: ${price}, 주요소재: ${material} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>`
+                    $('#card_box').append(temp_html)
+
+                    name = sec_sec[0]['name']
+                    color = sec_sec[0]['color']
+                    img = sec_sec[0]['img']
+                    price = sec_sec[0]['price']
+                    material = sec_sec[0]['material']
+                    kind = sec_sec[0]['kind']
+
+                    temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                       onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                        <div class="col">
+                                            <div class="card text-center" style="width: 340px;height: 280px;">
+                                                <div class="card-body">
+                                                    <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                    <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                    <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                        가격: ${price}, 주요소재: ${material} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>`
+                    $('#card_box').append(temp_html)
+
+                    name = max_max3[0]['name']
+                    color = max_max3[0]['color']
+                    img = max_max3[0]['img']
+                    price = max_max3[0]['price']
+                    material = max_max3[0]['material']
+                    kind = max_max3[0]['kind']
+
+                    temp_html = `<a href="/detail2/${name}" style="margin-bottom: 10px; margin-left: 5px;"
+                                       onclick="see('${color}', '${kind}', '${price}', '${material}')">
+                                        <div class="col">
+                                            <div class="card text-center" style="width: 340px;height: 280px;">
+                                                <div class="card-body">
+                                                    <img src="${img}" style="width: 140px; margin-bottom: 10px;">
+                                                    <h5 class="card-title" style="font-weight: bold;">${name}</h5>
+                                                    <p class="card-text" style="color: orangered; font-weight: bold;">
+                                                        가격: ${price}, 주요소재: ${material} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>`
+                    $('#card_box').append(temp_html)
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-light\" style="background-color: #ffffff; margin-bottom: 20px;">
+    <div class="container-fluid">
+        <a class="navbar-brand is-sparta" href="/"
+           style="font-family: 'Stylish', sans-serif;font-size: xxx-large;align-items: center">
+            <img src="{{ url_for('static', filename='logo2.png') }}" width="60" height="40" style="margin-right: 10px;">
+            Shopping mall
+        </a>
+        <form class="d-flex">
+            {#            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" 검색 창 사용할 시#}
+            {#                   style="margin-right: 10px;">#}
+            {#            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px;" >Search</button>#}
+            <a class="navbar-brand is-sparta" href="/user/{{ user_info.username }}"
+               style="font-family: 'Stylish', sans-serif;font-size: xx-large;align-items: center">
+                <img class="" src="{{ url_for('static', filename=user_info.profile_pic_real) }}" alt=""
+                     width="80" height="60" style="margin-right: 10px;">{{ user_info.profile_name }}
+            </a>
+        </form>
+    </div>
+</nav>
+<div class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;">
+    <a href="/detail/hood" style="margin-bottom: 20px; margin-left: 150px;">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='hoodie.png') }}"
+                         style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">후드티</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/knit">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='sweater.png') }}"
+                         style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">니트</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/short_tshirt">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='tshirt.png') }}"
+                         style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">반팔티</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/mtm">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='sweatshirt.png') }}"
+                         style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">맨투맨</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/shirt" style="margin-bottom: 20px; margin-left: 150px;">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='cloth.png') }}" style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">셔츠</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/padding">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='jacket.png') }}"
+                         style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">패딩</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/coat">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='trench-coat.png') }}"
+                         style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">코트</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+    <a href="/detail/vast">
+        <div class="col">
+            <div class="card text-center" style="width: 280px;height: 220px;">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='vest.png') }}" style="width: 150px; margin-bottom: 10px;">
+                    <h1 class="card-title">조끼</h1>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+<h1 style="font-size: x-large; margin-left: 50px;">내 사용에 맞춰 추천된 상품들</h1>
+<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto"></div>
+</body>
+</html>
+
+{#    <a href="/detail/jean">#}
+{#        <div class="col">#}
+{#            <div class="card text-center" style="width: 220px;height: 200px;">#}
+{#                <div class="card-body">#}
+{#                    <img src="{{ url_for('static', filename='jeans.png') }}" style="width: 140px; margin-bottom: 10px;">#}
+{#                    <h1 class="card-title">청바지</h1>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </a>#}
+{#    <a href="/detail/pant">#}
+{#        <div class="col">#}
+{#            <div class="card text-center" style="width: 220px;height: 200px;">#}
+{#                <div class="card-body">#}
+{#                    <img src="{{ url_for('static', filename='pants.png') }}" style="width: 140px; margin-bottom: 10px;">#}
+{#                    <h1 class="card-title">면바지</h1>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </a>#}
+{#    <a href="/detail/short_pant">#}
+{#        <div class="col">#}
+{#            <div class="card text-center" style="width: 220px;height: 200px;">#}
+{#                <div class="card-body">#}
+{#                    <img src="{{ url_for('static', filename='short_pants.png') }}" style="width: 140px; margin-bottom: 10px;">#}
+{#                    <h1 class="card-title">반바지</h1>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </a>#}
+{#    <a href="/detail/sport_shoe">#}
+{#        <div class="col">#}
+{#            <div class="card text-center" style="width: 240px;height: 220px;">#}
+{#                <div class="card-body">#}
+{#                    <img src="{{ url_for('static', filename='running-shoe.png') }}" style="width: 150px; margin-bottom: 10px;">#}
+{#                    <h1 class="card-title">운동화</h1>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </a>#}
+{#    <a href="/detail/flat_shoe">#}
+{#        <div class="col">#}
+{#            <div class="card text-center" style="width: 240px;height: 220px;">#}
+{#                <div class="card-body">#}
+{#                    <img src="{{ url_for('static', filename='flat-shoes.png') }}" style="width: 150px; margin-bottom: 10px;">#}
+{#                    <h1 class="card-title">단화</h1>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </a>#}
