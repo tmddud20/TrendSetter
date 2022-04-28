@@ -31,9 +31,15 @@
 
     <!-- 구글폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
     <script src="{{ url_for('static', filename='myjs.js') }}"></script>
 
     <style>
+        *{
+            font-family: 'Do Hyeon', sans-serif;
+        }
         .is-sparta {
             color: #FFD180 !important;
         }
@@ -195,7 +201,7 @@
 <div class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;">
     <a href="/detail/hood" style="margin-bottom: 20px; margin-left: 150px;">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large; color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='hoodie.png') }}"
                          style="width: 150px; margin-bottom: 10px;">
@@ -206,7 +212,7 @@
     </a>
     <a href="/detail/knit">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='sweater.png') }}"
                          style="width: 150px; margin-bottom: 10px;">
@@ -217,7 +223,7 @@
     </a>
     <a href="/detail/short_tshirt">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='tshirt.png') }}"
                          style="width: 150px; margin-bottom: 10px;">
@@ -228,7 +234,7 @@
     </a>
     <a href="/detail/mtm">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='sweatshirt.png') }}"
                          style="width: 150px; margin-bottom: 10px;">
@@ -239,7 +245,7 @@
     </a>
     <a href="/detail/shirt" style="margin-bottom: 20px; margin-left: 150px;">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='cloth.png') }}" style="width: 150px; margin-bottom: 10px;">
                     <h1 class="card-title">셔츠</h1>
@@ -249,7 +255,7 @@
     </a>
     <a href="/detail/padding">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='jacket.png') }}"
                          style="width: 150px; margin-bottom: 10px;">
@@ -260,7 +266,7 @@
     </a>
     <a href="/detail/coat">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='trench-coat.png') }}"
                          style="width: 150px; margin-bottom: 10px;">
@@ -271,7 +277,7 @@
     </a>
     <a href="/detail/vast">
         <div class="col">
-            <div class="card text-center" style="width: 280px;height: 220px;">
+            <div class="card text-center" style="width: 280px;height: 220px;font-size:x-large;color:#FFD180">
                 <div class="card-body">
                     <img src="{{ url_for('static', filename='vest.png') }}" style="width: 150px; margin-bottom: 10px;">
                     <h1 class="card-title">조끼</h1>
@@ -280,8 +286,10 @@
         </div>
     </a>
 </div>
-<h1 style="font-size: x-large; margin-left: 50px;">내 사용에 맞춰 추천된 상품들</h1>
-<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto"></div>
+
+<div><h1 style="font-size: xx-large; margin: 50px;color:blue;">내 사용에 맞춰 추천된 상품들</h1></div>
+
+<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;"></div>
 </body>
 </html>
 

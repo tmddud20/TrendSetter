@@ -31,10 +31,16 @@
 
     <!-- 구글폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    
     {#    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">#}
     <script src="{{ url_for('static', filename='myjs.js') }}"></script>
     <style>
+        *{
+            font-family: 'Do Hyeon', sans-serif;
+        }
         .is-sparta {
             color: #FFD180 !important;
         }
@@ -64,6 +70,11 @@
                     window.location.replace("/")
                 }
             })
+        }
+        
+        function like() {
+            alert("찜 기능은 아직 준비 중입니다!");
+            window.location.replace("/");
         }
 
         function get_cur_view() {
@@ -173,7 +184,7 @@
         </form>
     </div>
 </nav>
-<div class="card mb-3" style="max-width: 680px; margin-left: 350px;">
+<div class="card mb-3" style="max-width: 680px; margin-left: 350px; border-radius:20px;">
     <a href="{{ detailed_item.site }}" target="_blank">
         <div class="row g-0">
             <div class="col-md-4">
@@ -192,9 +203,14 @@
             </div>
         </div>
     </a>
-    <button type="button" class="btn btn-success" onclick="buy()">구매</button>
+    <div style="text-align: center; grid-template-columns: 1fr 1fr;">
+        <button type="button" class="btn btn-outline-success" onclick="buy()">구매</button>
+        <button type="button" class="btn btn-outline-dark" onclick="like()">찜</button>
+    </div>
 </div>
-<h1 style="font-size: x-large; margin-left: 20px;">현재 보고 있는 상품과 비슷한 상품들</h1>
-<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;"></div>
+<div>
+<div><h1 style="font-size: xx-large; margin: 20px;color:blue;">현재 보고 있는 상품과 비슷한 상품들</h1></div>
+<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto; "></div>
+</div>
 </body>
 </html>

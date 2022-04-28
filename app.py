@@ -15,7 +15,7 @@ app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
 
-client = MongoClient('3.36.70.96', 27017, username="test", password="test")
+client = MongoClient('35.89.49.141', 27017, username="test", password="test")
 db = client
 
 
@@ -262,6 +262,58 @@ def buy():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+@app.route('/like', methods=['POST'])
+def like():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        # payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # user_info = db.clothes.users.find_one({"username": payload["id"]})
+
+        # item_color = "buy_" + request.form["item_color"]
+        # item_kind = "buy_" + request.form["item_kind"]
+        # item_price = request.form["item_price"]
+        # item_price = item_price.replace("원", "")
+        # item_price = item_price.replace(",", "")
+        # item_material = request.form["item_material"]
+
+        # if int(item_price) < 30000:
+        #     item_price = "buy_0to3"
+        # elif int(item_price) < 60000:
+        #     item_price = "buy_3to6"
+        # elif int(item_price) < 90000:
+        #     item_price = "buy_6to9"
+        # elif int(item_price) < 120000:
+        #     item_price = "buy_9to12"
+        # elif int(item_price) < 150000:
+        #     item_price = "buy_12to15"
+        # else:
+        #     item_price = "buy_15to"
+
+        # if "폴리에스테르" in item_material:
+        #     item_material = "buy_poli"
+        # elif "면" in item_material:
+        #     item_material = "buy_cotton"
+        # else:
+        #     item_material = "buy_etc"
+
+        # view_item_color = db.color_info[payload["id"]].find_one({"username": payload["id"]})
+        # view_item_kind = db.kind_info[payload["id"]].find_one({"username": payload["id"]})
+        # view_item_price = db.price_info[payload["id"]].find_one({"username": payload["id"]})
+        # view_item_material = db.material_info[payload["id"]].find_one({"username": payload["id"]})
+
+        # color_plus1 = view_item_color[item_color] + 1
+        # kind_plus1 = view_item_kind[item_kind] + 1
+        # price_plus1 = view_item_price[item_price] + 1
+        # material_plus1 = view_item_material[item_material] + 1
+
+        # db.color_info[payload["id"]].update_one({'username': payload["id"]}, {'$set': {item_color: color_plus1}})
+        # db.kind_info[payload["id"]].update_one({'username': payload["id"]}, {'$set': {item_kind: kind_plus1}})
+        # db.price_info[payload["id"]].update_one({'username': payload["id"]}, {'$set': {item_price: price_plus1}})
+        # db.material_info[payload["id"]].update_one({'username': payload["id"]}, {'$set': {item_material: material_plus1}})
+
+        return jsonify({"result": "success", 'msg': '찜 기능은 준비 중입니다!'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 @app.route('/user/<username>')
 def user(username):
