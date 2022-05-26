@@ -28,6 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <!-- 구글폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
@@ -37,18 +38,87 @@
     
     {#    <link href="{{ url_for('static', filename='mystyle.css') }}" rel="stylesheet">#}
     <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+    
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>
+        $(".btn-like").click(function() {
+	    $(this).toggleClass("done");
+        })
+    </script>
+
     <style>
         *{
             font-family: 'Do Hyeon', sans-serif;
         }
+        .box {
+            width: 800px;
+            height: auto;
+            display: inline-block;
+            background: #DCFFDC;
+            text-align: center;
+            margin: 0 auto;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 0.5s;
+            transition-delay: 0.4s;
+            border-radius: 10%
+        }
+        .box:hover{
+            width : 1550px;
+            height : auto;
+        }
         .is-sparta {
             color: #FFD180 !important;
+        }
+        .btn-like {
+        color: transparent;
+        text-shadow: 0 0 2px rgba(255,255,255,.7), 0 0 0 #000;
+        }
+        .btn-like:hover {
+            text-shadow: 0 0 0 #ea0;
+        }
+        .btn-like.done {
+            color: inherit;
+            text-shadow: 0;
+        }
+        .btn-like.done:hover {
+            color: transparent;
+            text-shadow: 0 0 0 #777;
+        }
+        .nav-container {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: x-large;
+        }
+        .nav-item {
+            padding: 15px;
+            cursor: pointer;
+        }
+        .nav-item a {
+            text-align: center;
+            text-decoration: none;
+            color: #FFD180; 
+        }
+        .nav-item:nth-child(1) {
+            background-color: lightseagreen;
+        }
+        .nav-item:hover {
+            background-color: grey;
         }
 
         body {
             background-color: RGBA(255, 209, 128, 0.2);
             min-height: 100vh;
         }
+
     </style>
     <script>
         $(document).ready(function () {
@@ -76,6 +146,29 @@
             alert("찜 기능은 아직 준비 중입니다!");
             window.location.replace("/");
         }
+        function likes() { 
+            $.ajax({ 
+                type: 'POST', 
+                url: '/api/likes', 
+                 
+                success: function (response) { 
+                    alert(response['msg']);
+                } 
+            }); 
+        } 
+        function deletes()
+            { $.ajax({ 
+                type: 'POST', 
+                url: '/api/deletes', 
+                data: {
+                    sample_give:'샘플데이터'
+                }, 
+                success: function (response) { 
+                    alert(response['msg']);
+                } 
+            }); 
+        }
+
 
         function get_cur_view() {
             $("#card_box").empty()
@@ -163,6 +256,12 @@
             })
         }
     </script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>
+        $(".btn-like").click(function() {
+	        $(this).toggleClass("done");
+        })
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-light\" style="background-color: #ffffff; margin-bottom: 20px;">
@@ -171,6 +270,18 @@
            style="font-family: 'Stylish', sans-serif;font-size: xxx-large;align-items: center">
             <img src="{{ url_for('static', filename='logo2.png') }}" width="60" height="40" style="margin-right: 10px;">
             Shopping mall
+        </a>
+        <a>
+            <ul class="nav-container">
+                <ul class="nav-item"><a href="/detail/hood">후드티</a></ul>
+                <ul class="nav-item"><a href="/detail/knit">니트</a></ul>
+                <ul class="nav-item"><a href="/detail/short_tshirt">반팔티</a></ul>
+                <ul class="nav-item"><a href="/detail/mtm">맨투맨</a></ul>
+                <ul class="nav-item"><a href="/detail/shirt">셔츠</a></ul>
+                <ul class="nav-item"><a href="/detail/padding">패딩</a></ul>
+                <ul class="nav-item"><a href="/detail/coat">코트</a></ul>
+                <ul class="nav-item"><a href="/detail/vast">조끼</a></ul>
+            </ul>    
         </a>
         <form class="d-flex">
             {#            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" 검색 창 사용할 시#}
@@ -208,9 +319,10 @@
         <button type="button" class="btn btn-outline-dark" onclick="like()">찜</button>
     </div>
 </div>
-<div>
+</div>
+<div class = "box">
 <div><h1 style="font-size: xx-large; margin: 20px;color:blue;">현재 보고 있는 상품과 비슷한 상품들</h1></div>
-<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto; "></div>
+<div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;"></div>
 </div>
 </body>
 </html>

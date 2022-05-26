@@ -44,6 +44,52 @@
         .is-sparta {
             color: #FFD180 !important;
         }
+         .box {
+            width: 800px;
+            height: auto;
+            display: inline-block;
+            background: #DCFFDC;
+            text-align: center;
+            margin: 0 auto;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 0.5s;
+            transition-delay: 0.4s;
+            border-radius: 10%
+        }
+        .box:hover{
+            width : 1550px;
+            height : auto;
+        }
+        .nav-container {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: x-large;
+
+        }
+        .nav-item {
+            padding: 15px;
+            cursor: pointer;
+        }
+        .nav-item a {
+            text-align: center;
+            text-decoration: none;
+            color: #FFD180; 
+        }
+        .nav-item:nth-child(1) {
+            background-color: lightseagreen;
+        }
+        .nav-item:hover {
+            background-color: grey;
+        }
 
         body {
             background-color: RGBA(255, 209, 128, 0.2);
@@ -75,6 +121,18 @@
            style="font-family: 'Stylish', sans-serif;font-size: xxx-large;align-items: center">
             <img src="{{ url_for('static', filename='logo2.png') }}" width="60" height="40" style="margin-right: 10px;">
             Shopping mall
+        </a>
+        <a>
+            <ul class="nav-container">
+                <ul class="nav-item"><a href="/detail/hood">후드티</a></ul>
+                <ul class="nav-item"><a href="/detail/knit">니트</a></ul>
+                <ul class="nav-item"><a href="/detail/short_tshirt">반팔티</a></ul>
+                <ul class="nav-item"><a href="/detail/mtm">맨투맨</a></ul>
+                <ul class="nav-item"><a href="/detail/shirt">셔츠</a></ul>
+                <ul class="nav-item"><a href="/detail/padding">패딩</a></ul>
+                <ul class="nav-item"><a href="/detail/coat">코트</a></ul>
+                <ul class="nav-item"><a href="/detail/vast">조끼</a></ul>
+            </ul>    
         </a>
         <form class="d-flex">
             {#            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" 검색 창 사용할 시#}

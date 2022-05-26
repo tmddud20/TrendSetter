@@ -32,12 +32,34 @@
     <!-- 구글폰트 -->
     <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
     <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
     <style>
+        *{
+            font-family: 'Do Hyeon', sans-serif;
+        }
+        .box {
+            width: 800px;
+            height: auto;
+            display: inline-block;
+            background: #DCFFDC;
+            text-align: center;
+            margin: 0 auto;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            transition: all 0.5s;
+            transition-delay: 0.4s;
+            border-radius: 10%
+        }
+        .box:hover{
+            width : 1550px;
+            height : auto;
+        }
         .is-sparta {
             color: #FFD180 !important;
         }
-
+        
         body {
             background-color: RGBA(255, 209, 128, 0.2);
             min-height: 100vh;
@@ -153,7 +175,8 @@
         </div>
     </a>
 </div>
-<h1 style="font-size: x-large;">현재 보고 있는 상품과 비슷한 상품</h1>
+<div class="box">
+<div><h1 style="font-size: x-large;">현재 보고 있는 상품과 비슷한 상품</h1></div>
 <div id="card_box" class="row row-cols-1 row-cols-md-3 g-2" style="margin: auto;">
     {% for item in items %}
         <a href="/detail2/{{ item.name }}" style="margin-bottom: 10px; margin-left: 5px;"
@@ -170,6 +193,7 @@
             </div>
         </a>
     {% endfor %}
+</div>
 </div>
 </body>
 </html>
